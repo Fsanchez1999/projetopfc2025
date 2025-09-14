@@ -1,4 +1,4 @@
-# Projeto TCC 2025 - Backend
+# Projeto PFC 2025 - Backend
 Backend desenvolvido com Flask, MySQL e Alembic para gerenciamento de produtos e usuários.
 
 ## Como Rodar
