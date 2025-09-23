@@ -392,3 +392,17 @@ def update_user(user_id):
 @jwt_required()
 def logout():
     return jsonify({'message': 'Logout realizado com sucesso. Por favor, limpe o token.'})
+
+# Nova rota para o usuário deletar a própria conta
+@bp.route('/users/<int:user_id>', methods=['DELETE'])
+@jwt_required()
+def delete_user(user_id):
+    current_user_id = get_jwt_identity()
+    if str(current_user_id) != str(user_id):
+        return jsonify({'error': 'Você só pode deletar sua própria conta'}), 403
+
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return jsonify({'message': 'Conta deletada com sucesso'}), 200
